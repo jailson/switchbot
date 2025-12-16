@@ -1,19 +1,28 @@
-.PHONY: start install test help scan press stop
+.PHONY: start install test help scan press stop venv
 
 # Use the venv python from the current directory
 VENV := .venv/bin/python
 VENV_WIN := .venv\Scripts\python.exe
+PYTHON ?= python3
+
+venv:
+	@if [ ! -d ".venv" ]; then \
+		echo "Creating virtual environment (.venv)..."; \
+		$(PYTHON) -m venv .venv; \
+	else \
+		echo "Virtual environment already exists"; \
+	fi
 
 help:
 	@echo "Available commands:"
 	@echo "  make start     - Start the API server"
 	@echo "  make test      - Test the API with curl"
-	@echo "  make install   - Install dependencies"
+	@echo "  make install   - Create venv (if needed) and install dependencies"
 	@echo "  make scan      - Run the BLE SwitchBot scanner"
 	@echo "  make press     - Press a SwitchBot (BOT_MAC required)"
 	@echo "  make stop      - Stop the running API server"
 
-install:
+install: venv
 	$(VENV) -m pip install -r requirements.txt
 
 start:

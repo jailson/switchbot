@@ -61,18 +61,20 @@ bluetoothctl scan off
 
 ## Quick start
 
-1. Activate the project venv:
+1. Create the virtual environment (if needed) and install dependencies:
+
+```bash
+make install
+```
+
+`make install` runs `python3 -m venv .venv` automatically the first time. If your system uses another interpreter name, run `make install PYTHON=python`.
+
+2. Activate the project venv when you plan to run scripts directly:
 
 ```bash
 source .venv/bin/activate  # On Linux/macOS
 # or on Windows:
 .venv\Scripts\activate
-```
-
-2. Install dependencies (if needed):
-
-```bash
-pip install -r requirements.txt
 ```
 
 3. Start the API (binds to all interfaces on port 5000):
